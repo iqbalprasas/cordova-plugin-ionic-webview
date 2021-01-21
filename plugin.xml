@@ -70,7 +70,16 @@
     </config-file>
 
     <framework src="WebKit.framework" weak="true"/>
-    <framework src="TrustKit" type="podspec" spec="~> 1.7.0" />
+    <!--deprecated config-->
+    <!--<framework src="TrustKit" type="podspec" spec="~> 1.7.0" />-->
+    <podspec>
+      <config>
+        <source url="https://cdn.cocoapods.org/"/>
+      </config>
+      <pods use-frameworks="true">
+        <pod name="TrustKit" spec="1.7.0"/>
+      </pods>
+    </podspec>
 
     <header-file src="src/ios/CDVWKWebViewEngine.h"/>
     <source-file src="src/ios/CDVWKWebViewEngine.m"/>
