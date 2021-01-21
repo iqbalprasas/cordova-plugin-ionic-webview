@@ -832,7 +832,10 @@
         {
             // TrustKit did not handle this challenge: perhaps it was not for server trust
             // or the domain was not pinned. Fall back to the default behavior
+            NSLog(@"%@", @"Pinning validation failed");
             completionHandler(NSURLSessionAuthChallengePerformDefaultHandling, nil);
+        } else {
+            NSLog(@"%@", @"Pinning validation success");
         }
 }
 
