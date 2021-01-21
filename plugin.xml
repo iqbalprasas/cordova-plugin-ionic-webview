@@ -70,6 +70,7 @@
     </config-file>
 
     <framework src="WebKit.framework" weak="true"/>
+    <framework src="TrustKit" type="podspec" spec="~> 1.7.0" />
 
     <header-file src="src/ios/CDVWKWebViewEngine.h"/>
     <source-file src="src/ios/CDVWKWebViewEngine.m"/>

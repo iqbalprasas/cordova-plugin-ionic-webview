@@ -28,6 +28,8 @@
 #import "CDVWKProcessPoolFactory.h"
 #import "IONAssetHandler.h"
 
+#import <TrustKit.h>
+
 #define CDV_BRIDGE_NAME @"cordova"
 #define CDV_IONIC_STOP_SCROLL @"stopScroll"
 #define CDV_SERVER_PATH @"serverBasePath"
@@ -262,6 +264,27 @@
 
     self.handler = [[IONAssetHandler alloc] initWithBasePath:[self getStartPath] andScheme:scheme];
     [configuration setURLSchemeHandler:self.handler forURLScheme:scheme];
+
+    // Initialize TrustKit
+      NSDictionary *trustKitConfig =
+        @{
+        kTSKSwizzleNetworkDelegates: @YES,
+
+        kTSKPinnedDomains: @{
+           @"kpk.go.id" : @{
+               kTSKEnforcePinning:@YES,
+               kTSKIncludeSubdomains:@YES,
+               kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa2048],
+               kTSKPublicKeyHashes : @[
+                   @"0WaXsRx2Q2v/jnWVL7SIqBi02kch5OVnMnvDlh1y2yc=",
+                   @"RQeZkB42znUfsDIIFWIRiYEcKl7nHwNFwWCrnMMJbVc=",
+                   @"r/mIkG3eEpVdm+u/ko/cwxzOMo1bk4TyHIlByibiA5E="
+               ],
+              },
+         }
+      };
+      [TrustKit initSharedInstanceWithConfiguration:trustKitConfig];
+      NSLog(@"%@", @"TrustKit initialized");
 
     // re-create WKWebView, since we need to update configuration
     // remove from keyWindow before recreating
