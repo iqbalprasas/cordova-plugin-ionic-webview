@@ -28,7 +28,7 @@
 #import "CDVWKProcessPoolFactory.h"
 #import "IONAssetHandler.h"
 
-#import <TrustKit.h>
+#import <TrustKit/TrustKit.h>
 
 #define CDV_BRIDGE_NAME @"cordova"
 #define CDV_IONIC_STOP_SCROLL @"stopScroll"
@@ -272,7 +272,7 @@
 
         kTSKPinnedDomains: @{
            @"kpk.go.id" : @{
-               kTSKEnforcePinning:@YES,
+               kTSKEnforcePinning:@NO,
                kTSKIncludeSubdomains:@YES,
                kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa2048],
                kTSKPublicKeyHashes : @[
