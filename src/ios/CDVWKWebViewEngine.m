@@ -290,11 +290,6 @@
                kTSKEnforcePinning:@NO,
                kTSKIncludeSubdomains:@YES,
                kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa2048],
-               //kTSKPublicKeyHashes : @[
-               //    @"0WaXsRx2Q2v/jnWVL7SIqBi02kch5OVnMnvDlh1y2yc=",
-               //    @"RQeZkB42znUfsDIIFWIRiYEcKl7nHwNFwWCrnMMJbVc=",
-               //    @"r/mIkG3eEpVdm+u/ko/cwxzOMo1bk4TyHIlByibiA5E="
-               //],
                kTSKPublicKeyHashes : arrayHash,
               },
          }
