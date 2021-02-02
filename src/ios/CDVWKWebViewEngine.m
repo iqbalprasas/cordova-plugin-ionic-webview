@@ -301,7 +301,6 @@
       };
       [TrustKit initSharedInstanceWithConfiguration:trustKitConfig];
       NSLog(@"%@", @"TrustKit initialized");
-      NSLog(@"%@", arrayHash);
 
     // re-create WKWebView, since we need to update configuration
     // remove from keyWindow before recreating
