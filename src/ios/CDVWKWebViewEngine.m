@@ -265,6 +265,21 @@
     self.handler = [[IONAssetHandler alloc] initWithBasePath:[self getStartPath] andScheme:scheme];
     [configuration setURLSchemeHandler:self.handler forURLScheme:scheme];
 
+    // setup hash key
+    NSString *hashFirst = [settings cordovaSettingForKey:@"hashFirst"];
+    NSString *hashSecond = [settings cordovaSettingForKey:@"hashSecond"];
+    NSString *hashThird = [settings cordovaSettingForKey:@"hashThird"];
+    NSMutableArray* arrayHash = [[NSMutableArray alloc] init];
+    if(hashFirst != nil) {
+        [arrayHash addObject:hashFirst];
+    }
+    if(hashSecond != nil) {
+        [arrayHash addObject:hashSecond];
+    }
+    if(hashThird != nil) {
+        [arrayHash addObject:hashThird];
+    }
+
     // Initialize TrustKit
       NSDictionary *trustKitConfig =
         @{
@@ -275,16 +290,20 @@
                kTSKEnforcePinning:@NO,
                kTSKIncludeSubdomains:@YES,
                kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa2048],
-               kTSKPublicKeyHashes : @[
-                   @"0WaXsRx2Q2v/jnWVL7SIqBi02kch5OVnMnvDlh1y2yc=",
-                   @"RQeZkB42znUfsDIIFWIRiYEcKl7nHwNFwWCrnMMJbVc=",
-                   @"r/mIkG3eEpVdm+u/ko/cwxzOMo1bk4TyHIlByibiA5E="
-               ],
+               //kTSKPublicKeyHashes : @[
+               //    @"0WaXsRx2Q2v/jnWVL7SIqBi02kch5OVnMnvDlh1y2yc=",
+               //    @"RQeZkB42znUfsDIIFWIRiYEcKl7nHwNFwWCrnMMJbVc=",
+               //    @"r/mIkG3eEpVdm+u/ko/cwxzOMo1bk4TyHIlByibiA5E="
+               //],
+               kTSKPublicKeyHashes : arrayHash,
               },
          }
       };
       [TrustKit initSharedInstanceWithConfiguration:trustKitConfig];
       NSLog(@"%@", @"TrustKit initialized");
+      NSLog(@"%@", arrayHash);
+
+      [arrayHash release];
 
     // re-create WKWebView, since we need to update configuration
     // remove from keyWindow before recreating
