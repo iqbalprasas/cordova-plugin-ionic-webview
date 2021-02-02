@@ -303,8 +303,6 @@
       NSLog(@"%@", @"TrustKit initialized");
       NSLog(@"%@", arrayHash);
 
-      [arrayHash release];
-
     // re-create WKWebView, since we need to update configuration
     // remove from keyWindow before recreating
     [self.engineWebView removeFromSuperview];
